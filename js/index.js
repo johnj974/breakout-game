@@ -20,5 +20,18 @@ let paddle = new Paddle(GAME_WIDTH, GAME_HEIGHT);
 
 paddle.draw(context);
 
+// The Game Loop
+let lastTime = 0;
 
+function gameLoop(timestamp)
+{
+   let deltaTime = timestamp - lastTime;    // calculation of passed time
+   lastTime = timestamp;                    // re initialisation of lastTime variable
+   context.clearRect(0, 0, 800, 600);       // clears the screen
+   paddle.update(deltaTime);                // updates the paddle
+   paddle.draw(context);                    // redraws the paddle
+   requestAnimationFrame(gameLoop)
+}
+
+gameLoop()
 
