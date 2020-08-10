@@ -22,7 +22,7 @@ let paddle = new Paddle(GAME_WIDTH, GAME_HEIGHT);
 paddle.draw(context);
 
 // adding the input handler function here
-new InputHandler();
+new InputHandler(paddle);
 
 // The Game Loop
 let lastTime = 0;

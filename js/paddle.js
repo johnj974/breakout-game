@@ -4,12 +4,26 @@ export default class Paddle
     {
         this.width = 150;
         this.height = 20;
+        this.gameWidth = gameWidth;
+        this.maxSpeed = 7;      // sets paddle maxspeed
+        this.speed = 0;         // sets initial speed of paddle
         this.position = 
         {
             x: gameWidth / 2 - this.width / 2,
             y: gameHeight - this.height -10,
         }
     }
+
+    moveLeft()
+    {
+        this.speed = -this.maxSpeed;
+    }
+
+    moveRight()
+    {
+        this.speed = this.maxSpeed;
+    }
+
     draw(context)
     {
         context.fillStyle = "#0f0";
@@ -18,7 +32,9 @@ export default class Paddle
     update(deltaTime)
     {
         if(!deltaTime) return;
-        
+        this.position.x += this.speed;
+        if(this.position.x < 0) this.position.x = 0;      // stops the paddle from running of the canvas on the left side
+        if(this.position.x + this.width > this.gameWidth) this.position.x = this.gameWidth - this.width;
     }
 
 }
