@@ -24,6 +24,11 @@ export default class Paddle
         this.speed = this.maxSpeed;
     }
 
+    stop()
+    {
+        this.speed = 0;
+    }
+
     draw(context)
     {
         context.fillStyle = "#0f0";
@@ -31,7 +36,6 @@ export default class Paddle
     }
     update(deltaTime)
     {
-        if(!deltaTime) return;
         this.position.x += this.speed;
         if(this.position.x < 0) this.position.x = 0;      // stops the paddle from running of the canvas on the left side
         if(this.position.x + this.width > this.gameWidth) this.position.x = this.gameWidth - this.width;
