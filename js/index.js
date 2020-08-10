@@ -4,6 +4,7 @@ context.fillRect(20, 20, 50, 50);  // start drawing at 20 on the x axis and 20 o
 */
 
 import Paddle from '/js/paddle.js';
+import InputHandler from '/js/input.js';
 
 // grabbing the gamescreen element and assigning it to a canvas variable
 let canvas = document.getElementById("gameScreen");
@@ -19,6 +20,9 @@ context.clearRect(0, 0, 800, 600);
 let paddle = new Paddle(GAME_WIDTH, GAME_HEIGHT);
 
 paddle.draw(context);
+
+// adding the input handler function here
+new InputHandler();
 
 // The Game Loop
 let lastTime = 0;
