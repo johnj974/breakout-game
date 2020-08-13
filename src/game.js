@@ -19,24 +19,26 @@ export default class Game
     {
         this.gameWidth = gameWidth;
         this.gameHeight = gameHeight;
+        this.gamestate = GAMESTATE.MENU;
+        this.paddle = new Paddle(this);
+        this.ball = new Ball(this);
+        this.gameObjects = [];
+        new InputHandler(this.paddle, this);
     }
 
     start()
     {
-        this.gamestate = GAMESTATE.RUNNING;
-        this.paddle = new Paddle(this);
-        this.ball = new Ball(this);
+        if (this.gamestate !== GAMESTATE.MENU) return;
         let bricks = buildLevel(this, level1);
-       
         this.gameObjects = [this.ball, this.paddle, ...bricks]
 
-        // adding the input handler function here
-        new InputHandler(this.paddle, this);
+        this.gamestate = GAMESTATE.RUNNING;
+
     }
 
     update(deltaTime)
     {
-        if(this.gamestate == GAMESTATE.PAUSED)
+        if(this.gamestate === GAMESTATE.PAUSED || this.gamestate === GAMESTATE.MENU)
         {
             return;
         }
@@ -56,6 +58,17 @@ export default class Game
             context.fillStyle = "white"
             context.textAlign = "center"
             context.fillText("Paused", this.gameWidth/2, this.gameHeight/2)
+        }
+
+        if(this.gamestate == GAMESTATE.MENU)
+        {
+            context.rect(0, 0, this.gameWidth, this.gameHeight);
+            context.fillStyle = "rgba(0,0,0,1)";
+            context.fill();
+            context.font = "30px Arial"
+            context.fillStyle = "white"
+            context.textAlign = "center"
+            context.fillText("Press SPACEBAR To Start", this.gameWidth/2, this.gameHeight/2)
         }
     }
 

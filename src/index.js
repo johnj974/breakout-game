@@ -17,7 +17,7 @@ const GAME_HEIGHT = 600;
 context.clearRect(0, 0, GAME_WIDTH, GAME_HEIGHT);
 
 let game = new Game(GAME_WIDTH, GAME_HEIGHT);
-game.start();
+
 
 
 //paddle.draw(context);
