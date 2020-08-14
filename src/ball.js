@@ -9,7 +9,12 @@ export default class Ball
         this.gameWidth = game.gameWidth;
         this.gameHeight = game.gameHeight;
         this.game = game;
-        this.speed = 
+        this.reset();
+    }
+
+    reset()
+    {
+         this.speed = 
         {
             x : 4,
             y : -2,
@@ -20,6 +25,7 @@ export default class Ball
             y : 400,
         }
     }
+
     draw(context)
     {
          context.drawImage(this.image, this.position.x, this.position.y, this.size, this.size);      // draws the ball at position 10x and 10y
@@ -35,10 +41,17 @@ export default class Ball
             this.speed.x = -this.speed.x;
         }
 
-        // if the ball hits the top or bottom of the screen
-        if(this.position.y + this.size > this.gameHeight || this.position.y < 0)     // this keeps the ball within our canvas on the y axis
+        // if the ball hits the top of the screen
+        if(this.position.y < 0)     // this keeps the ball within our canvas on the y axis
         {
             this.speed.y = -this.speed.y;
+        }
+
+        // if the ball hits the bottom
+        if(this.position.y + this.size > this.gameHeight)
+        {
+            this.game.lives--
+            this.reset();
         }
 
        
